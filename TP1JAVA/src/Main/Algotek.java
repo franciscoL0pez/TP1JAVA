@@ -1,6 +1,7 @@
 package Main;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
+
 public class Algotek {
     private final ArrayList<Evento> eventos;
     private Artista artista;
@@ -56,16 +57,15 @@ public class Algotek {
 
     }
 
+
+
     public Double costoEntradaMasBarata(String unEvento, MetodoDePago unMetodo) {
-        Evento eventoConEntradaMasBarata = null;
-        for (Evento evento : eventos) {
+        Evento enTradaMasBarata = eventos.stream()
+                .min(Comparator.comparing(Evento::calcularTarifa))
+                .orElse(null);
 
 
-            //Evento eventoMasBarato = eventos.
-            //Ni idea como hacer esto!
-        }
-
-        return eventoConEntradaMasBarata.calcularTarifa();
+        return ( enTradaMasBarata.pagarcon(unMetodo));
 
     }
 }
